@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import Router from "next/router";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 
-import { api } from "../services/api";
+import { api } from "../services/apiClient";
 
 type SignInCredentials = {
     email: string;
@@ -72,6 +72,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                 roles,
             });
 
+            // @ts-ignore
             api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
             Router.push("/dashboard");
@@ -81,6 +82,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
 
     return (
+        // @ts-ignore
         <AuthContext.Provider value={{ isAuthenticated, signIn, user }}>
             {children}
         </AuthContext.Provider>
