@@ -7,7 +7,6 @@ export default function Metrics() {
 
 export const getServerSideProps = withSSRAuth(
     async (ctx) => {
-        // @ts-ignore
         const apiClient = setupAPIClient(ctx);
 
         return {
@@ -15,7 +14,6 @@ export const getServerSideProps = withSSRAuth(
         };
     },
     {
-        // @ts-ignore
         permissions: ["metrics.list"],
         roles: ["administrator"],
     }

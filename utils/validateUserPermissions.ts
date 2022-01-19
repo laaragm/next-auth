@@ -14,9 +14,7 @@ export function validateUserPermission({
     permissions,
     roles,
 }: ValidateUserPermissionsParams) {
-    // @ts-ignore
     if (permissions?.length > 0) {
-        // @ts-ignore
         const hasAllPermissions = permissions.some((permission) => {
             return user.permissions.includes(permission);
         });
@@ -26,9 +24,7 @@ export function validateUserPermission({
         }
     }
 
-    // @ts-ignore
     if (roles?.length > 0) {
-        // @ts-ignore
         const hasAllRoles = roles.some((role) => {
             return user.roles.includes(role);
         });

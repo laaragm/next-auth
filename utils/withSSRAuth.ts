@@ -20,7 +20,6 @@ export function withSSRAuth<T>(
 ): GetServerSideProps {
     return async (
         ctx: GetServerSidePropsContext
-        // @ts-ignore
     ): Promise<GetServerSidePropsResult<T>> => {
         const cookies = parseCookies(ctx);
         const token = cookies["nextAuth.token"];
@@ -37,7 +36,6 @@ export function withSSRAuth<T>(
         if (options) {
             const user =
                 decode<{ permissions: string[]; roles: string[] }>(token);
-            // @ts-ignore
             const { permissions, roles } = options;
             const userHasValidPermissions = validateUserPermission({
                 user,

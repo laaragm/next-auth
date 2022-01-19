@@ -4,7 +4,6 @@ import { signOut } from "../contexts/AuthContext";
 import { AuthTokenError } from "./errors/AuthTokenError";
 
 let isRefreshing = false;
-// @ts-ignore
 let failedRequestsQueue = [];
 
 export function setupAPIClient(ctx = undefined) {
@@ -22,10 +21,8 @@ export function setupAPIClient(ctx = undefined) {
             return response;
         },
         (error: AxiosError) => {
-            // @ts-ignore
             const isUnauthorized = error.response.status === 401;
             const tokenHasExpired =
-                // @ts-ignore
                 error.response.data?.code === "token.expired";
             if (isUnauthorized) {
                 if (tokenHasExpired) {
@@ -57,19 +54,16 @@ export function setupAPIClient(ctx = undefined) {
                                         path: "/", // all routes have access to this cookie
                                     }
                                 );
-                                // @ts-ignore
                                 api.defaults.headers[
                                     "Authorization"
                                 ] = `Bearer ${response.data.token}`;
 
-                                // @ts-ignore
                                 failedRequestsQueue.forEach((request) =>
                                     request.onSuccess(response.data.token)
                                 );
                                 failedRequestsQueue = [];
                             })
                             .catch((error) => {
-                                // @ts-ignore
                                 failedRequestsQueue.forEach((request) =>
                                     request.onFailure(error)
                                 );
@@ -87,7 +81,6 @@ export function setupAPIClient(ctx = undefined) {
                     return new Promise((resolve, reject) => {
                         failedRequestsQueue.push({
                             onSuccess: (token: string) => {
-                                // @ts-ignore
                                 originalConfig.headers[
                                     "Authorization"
                                 ] = `Bearer ${token}`;

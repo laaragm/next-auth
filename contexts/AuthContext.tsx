@@ -92,7 +92,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                 roles,
             });
 
-            // @ts-ignore
             api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
             Router.push("/dashboard");
@@ -103,7 +102,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     return (
         <AuthContext.Provider
-            // @ts-ignore
             value={{ isAuthenticated, signIn, signOut, user }}
         >
             {children}
